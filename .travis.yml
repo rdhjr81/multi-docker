@@ -9,16 +9,16 @@ script:
   - docker run -e CI=true rho/react-test npm test
 
 after_success:
-  - docker build -t {DOCKER_ID}/multi-client ./client
-  - docker build -t {DOCKER_ID}/multi-nginx ./nginx
-  - docker build -t {DOCKER_ID}/multi-server ./server
-  - docker build -t {DOCKER_ID}/multi-worker ./worker
+  - docker build -t dockspace9/multi-client ./client
+  - docker build -t dockspace9/multi-nginx ./nginx
+  - docker build -t dockspace9/multi-server ./server
+  - docker build -t dockspace9/multi-worker ./worker
 
 #log into docker cli 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 #take images and push them to docker hub 
-  - docker push {DOCKER_ID}/multi-client
-  - docker push {DOCKER_ID}/multi-nginx 
-  - docker push {DOCKER_ID}/multi-server
-  - docker push {DOCKER_ID}/multi-worker
+  - docker push dockspace9/multi-client
+  - docker push dockspace9/multi-nginx 
+  - docker push dockspace9/multi-server
+  - docker push dockspace9/multi-worker
