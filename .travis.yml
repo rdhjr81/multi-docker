@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t dockspace9/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t rho/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true dockspace9/react-test npm test
+  - docker run -e CI=true rho/react-test npm test
 
 after_success:
-  - docker build -t dockspace9/multi-client ./client
-  - docker build -t dockspace9/multi-nginx ./nginx
-  - docker build -t dockspace9/multi-server ./server
-  - docker build -t dockspace9/multi-worker ./worker
+  - docker build -t {DOCKER_ID}/multi-client ./client
+  - docker build -t {DOCKER_ID}/multi-nginx ./nginx
+  - docker build -t {DOCKER_ID}/multi-server ./server
+  - docker build -t {DOCKER_ID}/multi-worker ./worker
 
 #log into docker cli 
   - echo "$DOCKER_PASSWORD" | docker login - u "$DOCKER_ID" --password-stdin
 
 #take images and push them to docker hub 
-  - docker push dockspace9/multi-client
-  - docker push dockspace9/multi-nginx 
-  - docker push dockspace9/multi-server
-  - docker push dockspace9/multi-worker
+  - docker push {DOCKER_ID}/multi-client
+  - docker push {DOCKER_ID}/multi-nginx 
+  - docker push {DOCKER_ID}/multi-server
+  - docker push {DOCKER_ID}/multi-worker
