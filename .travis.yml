@@ -3,16 +3,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t rho/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t dockspace9/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true rho/react-test npm test
+  - docker run -e CI=true dockspace9/react-test npm test
 
 after_success:
-  - docker build -t rho/multi-client ./client
-  - docker build -t rho/multi-nginx ./nginx
-  - docker build -t rho/multi-server ./server
-  - docker build -t rho/multi-worker ./worker
+  - docker build -t dockspace9/multi-client ./client
+  - docker build -t dockspace9/multi-nginx ./nginx
+  - docker build -t dockspace9/multi-server ./server
+  - docker build -t dockspace9/multi-worker ./worker
 
 #log into docker cli 
   - echo "$DOCKER_PASSWORD" | docker login - u "$DOCKER_ID" --password-stdin
