@@ -22,3 +22,15 @@ after_success:
   - docker push dockspace9/multi-nginx 
   - docker push dockspace9/multi-server
   - docker push dockspace9/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: Multidocker-env
+  bucket-name: elasticbeanstalk-us-east-2-688614861921
+  bucket-path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
